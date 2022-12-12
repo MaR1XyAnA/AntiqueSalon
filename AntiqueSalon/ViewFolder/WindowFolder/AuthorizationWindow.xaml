@@ -1,0 +1,48 @@
+﻿<Window x:Class="AntiqueSalon.ViewFolder.WindowFolder.AuthorizationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" Style="{StaticResource Window}"
+        Title="Авторизация" Height="450" Width="800">
+    <Border Height="450" Width="800" Style="{StaticResource MainBorder}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Background="Transparent" x:Name="SpaseBarGrid" MouseDown="SpaseBarGrid_MouseDown">
+                <Border Style="{StaticResource ButtonBorder}"/>
+                <TextBlock
+                    Style="{StaticResource TitleTextBlock}"
+                    Text="АВТОРИЗАЦИЯ"
+                    Margin="10 0 0 0"/>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <Button 
+                        ToolTip="СВЕРНУТЬ"
+                        x:Name="RollUpButton"
+                        Click="RollUpButton_Click"
+                        Content="—"
+                        Width="55" 
+                        Height="32"
+                        Style="{StaticResource SpareButton}">
+                        <Button.Effect>
+                            <BlurEffect Radius="1"/>
+                        </Button.Effect>
+                    </Button>
+                    <Button 
+                        Click="CloseButton_Click"
+                        x:Name="CloseButton"
+                        Content="✕"
+                        Width="55" 
+                        Height="32"
+                        Style="{StaticResource SpareButtonClose}">
+                        <Button.Effect>
+                            <BlurEffect Radius="1"/>
+                        </Button.Effect>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
