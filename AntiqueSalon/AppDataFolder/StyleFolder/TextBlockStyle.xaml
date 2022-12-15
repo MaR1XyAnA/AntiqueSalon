@@ -1,17 +1,17 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Style x:Key="MainStyleTextBlock" TargetType="TextBlock">
-        <Setter Property="Text" Value="CollegeChatApp"/>
-        <Setter Property="FontFamily" Value="\ContentFolder\FamilyFolder\#Rubik Glitch"/>
-        <Setter Property="FontSize" Value="50"/>
-        <Setter Property="Foreground" Value="#1d63b8"/>
+    <Style TargetType="TextBlock" x:Key="StyleTextBlock">
+        <Setter Property="FontSize" Value="25"/>
+        <Setter Property="Foreground" Value="#D72323"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="FontFamily" Value="\SourseFolder\FontFolder\#RussianPunk"/>
     </Style>
-    <Style x:Key="TitleTextBlock" TargetType="TextBlock" BasedOn="{StaticResource MainStyleTextBlock}">
+    <Style TargetType="TextBlock" x:Key="InfoDataBaseFolse" BasedOn="{StaticResource StyleTextBlock}">
+        <Setter Property="Foreground" Value="#EEEEEE"/>
+        <Setter Property="FontFamily" Value="\SourseFolder\FontFolder\#Neucha"/>
         <Setter Property="FontSize" Value="18"/>
-        <Setter Property="Foreground" Value="#fff"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+    <Style TargetType="TextBlock" x:Key="InfoDataBaseTrue" BasedOn="{StaticResource InfoDataBaseFolse}">
+        <Setter Property="Foreground" Value="#D72323"/>
     </Style>
 </ResourceDictionary>

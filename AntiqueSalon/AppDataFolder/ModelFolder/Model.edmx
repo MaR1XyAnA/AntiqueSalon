@@ -1,0 +1,483 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище AntiqueSalonDataBaseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AntiqueTable">
+          <Key>
+            <PropertyRef Name="PersonalNumberAntique" />
+          </Key>
+          <Property Name="PersonalNumberAntique" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameAntique" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PNTypeAntique" Type="int" Nullable="false" />
+          <Property Name="DatepurchaseAntique" Type="date" Nullable="false" />
+          <Property Name="PriceAntique" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="EvaluationPriceAntique" Type="decimal" Precision="26" Scale="6" StoreGeneratedPattern="Computed" />
+          <Property Name="InsuranceAntique" Type="bit" Nullable="false" />
+          <Property Name="HistoryAntique" Type="nvarchar" MaxLength="1000" />
+          <Property Name="PNWorker" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RentTable">
+          <Key>
+            <PropertyRef Name="PersonalNumberRent" />
+          </Key>
+          <Property Name="PersonalNumberRent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SurnameRent" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NameRent" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MiddlenameRent" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DatestartRent" Type="date" Nullable="false" />
+          <Property Name="DatestopRent" Type="date" />
+          <Property Name="PNWorker" Type="int" Nullable="false" />
+          <Property Name="PNAntique" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RoleTable">
+          <Key>
+            <PropertyRef Name="PersonalNumberRole" />
+          </Key>
+          <Property Name="PersonalNumberRole" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameRole" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TypeAntiqueTable">
+          <Key>
+            <PropertyRef Name="PersonalNumberType" />
+          </Key>
+          <Property Name="PersonalNumberType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameType" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkerTable">
+          <Key>
+            <PropertyRef Name="PersonalNumberWorker" />
+          </Key>
+          <Property Name="PersonalNumberWorker" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LoginWorker" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PasswordWorker" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PNRoleWorker" Type="int" Nullable="false" />
+          <Property Name="SurnameWorker" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NameWorker" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MiddlenameWorker" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="СollectionTable">
+          <Key>
+            <PropertyRef Name="PersonalNumberCollection" />
+            <PropertyRef Name="PNAntique" />
+          </Key>
+          <Property Name="PersonalNumberCollection" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PNAntique" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AntiqueTable_TypeAntiqueTable">
+          <End Role="TypeAntiqueTable" Type="Self.TypeAntiqueTable" Multiplicity="1" />
+          <End Role="AntiqueTable" Type="Self.AntiqueTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeAntiqueTable">
+              <PropertyRef Name="PersonalNumberType" />
+            </Principal>
+            <Dependent Role="AntiqueTable">
+              <PropertyRef Name="PNTypeAntique" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AntiqueTable_WorkerTable">
+          <End Role="WorkerTable" Type="Self.WorkerTable" Multiplicity="1" />
+          <End Role="AntiqueTable" Type="Self.AntiqueTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerTable">
+              <PropertyRef Name="PersonalNumberWorker" />
+            </Principal>
+            <Dependent Role="AntiqueTable">
+              <PropertyRef Name="PNWorker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RentTable_AntiqueTable">
+          <End Role="AntiqueTable" Type="Self.AntiqueTable" Multiplicity="1" />
+          <End Role="RentTable" Type="Self.RentTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AntiqueTable">
+              <PropertyRef Name="PersonalNumberAntique" />
+            </Principal>
+            <Dependent Role="RentTable">
+              <PropertyRef Name="PNAntique" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RentTable_WorkerTable">
+          <End Role="WorkerTable" Type="Self.WorkerTable" Multiplicity="1" />
+          <End Role="RentTable" Type="Self.RentTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerTable">
+              <PropertyRef Name="PersonalNumberWorker" />
+            </Principal>
+            <Dependent Role="RentTable">
+              <PropertyRef Name="PNWorker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkerTable_RoleTable">
+          <End Role="RoleTable" Type="Self.RoleTable" Multiplicity="1" />
+          <End Role="WorkerTable" Type="Self.WorkerTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleTable">
+              <PropertyRef Name="PersonalNumberRole" />
+            </Principal>
+            <Dependent Role="WorkerTable">
+              <PropertyRef Name="PNRoleWorker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_СollectionTable_AntiqueTable">
+          <End Role="AntiqueTable" Type="Self.AntiqueTable" Multiplicity="1" />
+          <End Role="СollectionTable" Type="Self.СollectionTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AntiqueTable">
+              <PropertyRef Name="PersonalNumberAntique" />
+            </Principal>
+            <Dependent Role="СollectionTable">
+              <PropertyRef Name="PNAntique" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище AntiqueSalonDataBaseModelContainer">
+          <EntitySet Name="AntiqueTable" EntityType="Self.AntiqueTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RentTable" EntityType="Self.RentTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoleTable" EntityType="Self.RoleTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeAntiqueTable" EntityType="Self.TypeAntiqueTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkerTable" EntityType="Self.WorkerTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="СollectionTable" EntityType="Self.СollectionTable" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AntiqueTable_TypeAntiqueTable" Association="Self.FK_AntiqueTable_TypeAntiqueTable">
+            <End Role="TypeAntiqueTable" EntitySet="TypeAntiqueTable" />
+            <End Role="AntiqueTable" EntitySet="AntiqueTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AntiqueTable_WorkerTable" Association="Self.FK_AntiqueTable_WorkerTable">
+            <End Role="WorkerTable" EntitySet="WorkerTable" />
+            <End Role="AntiqueTable" EntitySet="AntiqueTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RentTable_AntiqueTable" Association="Self.FK_RentTable_AntiqueTable">
+            <End Role="AntiqueTable" EntitySet="AntiqueTable" />
+            <End Role="RentTable" EntitySet="RentTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RentTable_WorkerTable" Association="Self.FK_RentTable_WorkerTable">
+            <End Role="WorkerTable" EntitySet="WorkerTable" />
+            <End Role="RentTable" EntitySet="RentTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkerTable_RoleTable" Association="Self.FK_WorkerTable_RoleTable">
+            <End Role="RoleTable" EntitySet="RoleTable" />
+            <End Role="WorkerTable" EntitySet="WorkerTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_СollectionTable_AntiqueTable" Association="Self.FK_СollectionTable_AntiqueTable">
+            <End Role="AntiqueTable" EntitySet="AntiqueTable" />
+            <End Role="СollectionTable" EntitySet="СollectionTable" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AntiqueSalonDataBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AntiqueTable">
+          <Key>
+            <PropertyRef Name="PersonalNumberAntique" />
+          </Key>
+          <Property Name="PersonalNumberAntique" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameAntique" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PNTypeAntique" Type="Int32" Nullable="false" />
+          <Property Name="DatepurchaseAntique" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PriceAntique" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="EvaluationPriceAntique" Type="Decimal" Precision="26" Scale="6" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="InsuranceAntique" Type="Boolean" Nullable="false" />
+          <Property Name="HistoryAntique" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="PNWorker" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TypeAntiqueTable" Relationship="Self.FK_AntiqueTable_TypeAntiqueTable" FromRole="AntiqueTable" ToRole="TypeAntiqueTable" />
+          <NavigationProperty Name="WorkerTable" Relationship="Self.FK_AntiqueTable_WorkerTable" FromRole="AntiqueTable" ToRole="WorkerTable" />
+          <NavigationProperty Name="RentTable" Relationship="Self.FK_RentTable_AntiqueTable" FromRole="AntiqueTable" ToRole="RentTable" />
+          <NavigationProperty Name="СollectionTable" Relationship="Self.FK_СollectionTable_AntiqueTable" FromRole="AntiqueTable" ToRole="СollectionTable" />
+        </EntityType>
+        <EntityType Name="RentTable">
+          <Key>
+            <PropertyRef Name="PersonalNumberRent" />
+          </Key>
+          <Property Name="PersonalNumberRent" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SurnameRent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NameRent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiddlenameRent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DatestartRent" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DatestopRent" Type="DateTime" Precision="0" />
+          <Property Name="PNWorker" Type="Int32" Nullable="false" />
+          <Property Name="PNAntique" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AntiqueTable" Relationship="Self.FK_RentTable_AntiqueTable" FromRole="RentTable" ToRole="AntiqueTable" />
+          <NavigationProperty Name="WorkerTable" Relationship="Self.FK_RentTable_WorkerTable" FromRole="RentTable" ToRole="WorkerTable" />
+        </EntityType>
+        <EntityType Name="RoleTable">
+          <Key>
+            <PropertyRef Name="PersonalNumberRole" />
+          </Key>
+          <Property Name="PersonalNumberRole" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameRole" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="WorkerTable" Relationship="Self.FK_WorkerTable_RoleTable" FromRole="RoleTable" ToRole="WorkerTable" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TypeAntiqueTable">
+          <Key>
+            <PropertyRef Name="PersonalNumberType" />
+          </Key>
+          <Property Name="PersonalNumberType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AntiqueTable" Relationship="Self.FK_AntiqueTable_TypeAntiqueTable" FromRole="TypeAntiqueTable" ToRole="AntiqueTable" />
+        </EntityType>
+        <EntityType Name="WorkerTable">
+          <Key>
+            <PropertyRef Name="PersonalNumberWorker" />
+          </Key>
+          <Property Name="PersonalNumberWorker" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoginWorker" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasswordWorker" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PNRoleWorker" Type="Int32" Nullable="false" />
+          <Property Name="SurnameWorker" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NameWorker" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiddlenameWorker" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AntiqueTable" Relationship="Self.FK_AntiqueTable_WorkerTable" FromRole="WorkerTable" ToRole="AntiqueTable" />
+          <NavigationProperty Name="RentTable" Relationship="Self.FK_RentTable_WorkerTable" FromRole="WorkerTable" ToRole="RentTable" />
+          <NavigationProperty Name="RoleTable" Relationship="Self.FK_WorkerTable_RoleTable" FromRole="WorkerTable" ToRole="RoleTable" />
+        </EntityType>
+        <EntityType Name="СollectionTable">
+          <Key>
+            <PropertyRef Name="PersonalNumberCollection" />
+            <PropertyRef Name="PNAntique" />
+          </Key>
+          <Property Name="PersonalNumberCollection" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PNAntique" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AntiqueTable" Relationship="Self.FK_СollectionTable_AntiqueTable" FromRole="СollectionTable" ToRole="AntiqueTable" />
+        </EntityType>
+        <Association Name="FK_AntiqueTable_TypeAntiqueTable">
+          <End Role="TypeAntiqueTable" Type="Self.TypeAntiqueTable" Multiplicity="1" />
+          <End Role="AntiqueTable" Type="Self.AntiqueTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeAntiqueTable">
+              <PropertyRef Name="PersonalNumberType" />
+            </Principal>
+            <Dependent Role="AntiqueTable">
+              <PropertyRef Name="PNTypeAntique" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AntiqueTable_WorkerTable">
+          <End Role="WorkerTable" Type="Self.WorkerTable" Multiplicity="1" />
+          <End Role="AntiqueTable" Type="Self.AntiqueTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerTable">
+              <PropertyRef Name="PersonalNumberWorker" />
+            </Principal>
+            <Dependent Role="AntiqueTable">
+              <PropertyRef Name="PNWorker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RentTable_AntiqueTable">
+          <End Role="AntiqueTable" Type="Self.AntiqueTable" Multiplicity="1" />
+          <End Role="RentTable" Type="Self.RentTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AntiqueTable">
+              <PropertyRef Name="PersonalNumberAntique" />
+            </Principal>
+            <Dependent Role="RentTable">
+              <PropertyRef Name="PNAntique" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_СollectionTable_AntiqueTable">
+          <End Role="AntiqueTable" Type="Self.AntiqueTable" Multiplicity="1" />
+          <End Role="СollectionTable" Type="Self.СollectionTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AntiqueTable">
+              <PropertyRef Name="PersonalNumberAntique" />
+            </Principal>
+            <Dependent Role="СollectionTable">
+              <PropertyRef Name="PNAntique" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RentTable_WorkerTable">
+          <End Role="WorkerTable" Type="Self.WorkerTable" Multiplicity="1" />
+          <End Role="RentTable" Type="Self.RentTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerTable">
+              <PropertyRef Name="PersonalNumberWorker" />
+            </Principal>
+            <Dependent Role="RentTable">
+              <PropertyRef Name="PNWorker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkerTable_RoleTable">
+          <End Role="RoleTable" Type="Self.RoleTable" Multiplicity="1" />
+          <End Role="WorkerTable" Type="Self.WorkerTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleTable">
+              <PropertyRef Name="PersonalNumberRole" />
+            </Principal>
+            <Dependent Role="WorkerTable">
+              <PropertyRef Name="PNRoleWorker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AntiqueSalonDataBaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AntiqueTable" EntityType="Self.AntiqueTable" />
+          <EntitySet Name="RentTable" EntityType="Self.RentTable" />
+          <EntitySet Name="RoleTable" EntityType="Self.RoleTable" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TypeAntiqueTable" EntityType="Self.TypeAntiqueTable" />
+          <EntitySet Name="WorkerTable" EntityType="Self.WorkerTable" />
+          <EntitySet Name="СollectionTable" EntityType="Self.СollectionTable" />
+          <AssociationSet Name="FK_AntiqueTable_TypeAntiqueTable" Association="Self.FK_AntiqueTable_TypeAntiqueTable">
+            <End Role="TypeAntiqueTable" EntitySet="TypeAntiqueTable" />
+            <End Role="AntiqueTable" EntitySet="AntiqueTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AntiqueTable_WorkerTable" Association="Self.FK_AntiqueTable_WorkerTable">
+            <End Role="WorkerTable" EntitySet="WorkerTable" />
+            <End Role="AntiqueTable" EntitySet="AntiqueTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RentTable_AntiqueTable" Association="Self.FK_RentTable_AntiqueTable">
+            <End Role="AntiqueTable" EntitySet="AntiqueTable" />
+            <End Role="RentTable" EntitySet="RentTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_СollectionTable_AntiqueTable" Association="Self.FK_СollectionTable_AntiqueTable">
+            <End Role="AntiqueTable" EntitySet="AntiqueTable" />
+            <End Role="СollectionTable" EntitySet="СollectionTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RentTable_WorkerTable" Association="Self.FK_RentTable_WorkerTable">
+            <End Role="WorkerTable" EntitySet="WorkerTable" />
+            <End Role="RentTable" EntitySet="RentTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkerTable_RoleTable" Association="Self.FK_WorkerTable_RoleTable">
+            <End Role="RoleTable" EntitySet="RoleTable" />
+            <End Role="WorkerTable" EntitySet="WorkerTable" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище AntiqueSalonDataBaseModelContainer" CdmEntityContainer="AntiqueSalonDataBaseEntities">
+          <EntitySetMapping Name="AntiqueTable">
+            <EntityTypeMapping TypeName="AntiqueSalonDataBaseModel.AntiqueTable">
+              <MappingFragment StoreEntitySet="AntiqueTable">
+                <ScalarProperty Name="PersonalNumberAntique" ColumnName="PersonalNumberAntique" />
+                <ScalarProperty Name="NameAntique" ColumnName="NameAntique" />
+                <ScalarProperty Name="PNTypeAntique" ColumnName="PNTypeAntique" />
+                <ScalarProperty Name="DatepurchaseAntique" ColumnName="DatepurchaseAntique" />
+                <ScalarProperty Name="PriceAntique" ColumnName="PriceAntique" />
+                <ScalarProperty Name="EvaluationPriceAntique" ColumnName="EvaluationPriceAntique" />
+                <ScalarProperty Name="InsuranceAntique" ColumnName="InsuranceAntique" />
+                <ScalarProperty Name="HistoryAntique" ColumnName="HistoryAntique" />
+                <ScalarProperty Name="PNWorker" ColumnName="PNWorker" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RentTable">
+            <EntityTypeMapping TypeName="AntiqueSalonDataBaseModel.RentTable">
+              <MappingFragment StoreEntitySet="RentTable">
+                <ScalarProperty Name="PersonalNumberRent" ColumnName="PersonalNumberRent" />
+                <ScalarProperty Name="SurnameRent" ColumnName="SurnameRent" />
+                <ScalarProperty Name="NameRent" ColumnName="NameRent" />
+                <ScalarProperty Name="MiddlenameRent" ColumnName="MiddlenameRent" />
+                <ScalarProperty Name="DatestartRent" ColumnName="DatestartRent" />
+                <ScalarProperty Name="DatestopRent" ColumnName="DatestopRent" />
+                <ScalarProperty Name="PNWorker" ColumnName="PNWorker" />
+                <ScalarProperty Name="PNAntique" ColumnName="PNAntique" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleTable">
+            <EntityTypeMapping TypeName="AntiqueSalonDataBaseModel.RoleTable">
+              <MappingFragment StoreEntitySet="RoleTable">
+                <ScalarProperty Name="PersonalNumberRole" ColumnName="PersonalNumberRole" />
+                <ScalarProperty Name="NameRole" ColumnName="NameRole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="AntiqueSalonDataBaseModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeAntiqueTable">
+            <EntityTypeMapping TypeName="AntiqueSalonDataBaseModel.TypeAntiqueTable">
+              <MappingFragment StoreEntitySet="TypeAntiqueTable">
+                <ScalarProperty Name="PersonalNumberType" ColumnName="PersonalNumberType" />
+                <ScalarProperty Name="NameType" ColumnName="NameType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkerTable">
+            <EntityTypeMapping TypeName="AntiqueSalonDataBaseModel.WorkerTable">
+              <MappingFragment StoreEntitySet="WorkerTable">
+                <ScalarProperty Name="PersonalNumberWorker" ColumnName="PersonalNumberWorker" />
+                <ScalarProperty Name="LoginWorker" ColumnName="LoginWorker" />
+                <ScalarProperty Name="PasswordWorker" ColumnName="PasswordWorker" />
+                <ScalarProperty Name="PNRoleWorker" ColumnName="PNRoleWorker" />
+                <ScalarProperty Name="SurnameWorker" ColumnName="SurnameWorker" />
+                <ScalarProperty Name="NameWorker" ColumnName="NameWorker" />
+                <ScalarProperty Name="MiddlenameWorker" ColumnName="MiddlenameWorker" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="СollectionTable">
+            <EntityTypeMapping TypeName="AntiqueSalonDataBaseModel.СollectionTable">
+              <MappingFragment StoreEntitySet="СollectionTable">
+                <ScalarProperty Name="PersonalNumberCollection" ColumnName="PersonalNumberCollection" />
+                <ScalarProperty Name="PNAntique" ColumnName="PNAntique" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -4,19 +4,25 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" Style="{StaticResource Window}"
-        Title="Авторизация" Height="450" Width="800">
-    <Border Height="450" Width="800" Style="{StaticResource MainBorder}">
+        Title="Авторизация" Height="400" Width="700">
+    <Border CornerRadius="20" Background="#3A4750" BorderBrush="Transparent">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="32"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            <Border Style="{StaticResource SpaisBorder}"/>
             <Grid Background="Transparent" x:Name="SpaseBarGrid" MouseDown="SpaseBarGrid_MouseDown">
-                <Border Style="{StaticResource ButtonBorder}"/>
-                <TextBlock
-                    Style="{StaticResource TitleTextBlock}"
-                    Text="АВТОРИЗАЦИЯ"
-                    Margin="10 0 0 0"/>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <Image
+                        Height="20"
+                        Width="20"
+                        Margin="20 0 0 0"/>
+                    <TextBlock 
+                        Style="{StaticResource StyleTextBlock}"
+                        Margin="10 0 0 0" 
+                        Text="SummerCamp"/>
+                </StackPanel>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
                     <Button 
                         ToolTip="СВЕРНУТЬ"
@@ -41,6 +47,37 @@
                             <BlurEffect Radius="1"/>
                         </Button.Effect>
                     </Button>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel Margin="0 0 0 15" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock 
+                            HorizontalAlignment="Center"
+                            Text="LOGIN" 
+                            Style="{StaticResource StyleTextBlock}"/>
+                        <TextBox 
+                            x:Name="LoginTextBox"
+                            Height="40"
+                            Width="430"/>
+                    </StackPanel>
+                    <StackPanel Margin="0 15 0 0" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock 
+                            HorizontalAlignment="Center"
+                            Text="PASSWORD" 
+                            Style="{StaticResource StyleTextBlock}"/>
+                        <PasswordBox 
+                            x:Name="PasswordPasswordBox"
+                            Height="40"
+                            Width="430"/>
+                    </StackPanel>
+                    <Button
+                        x:Name="NextButton"
+                        Click="NextButton_Click"
+                        Margin="0 50 0 0"
+                        Content="ВОЙТИ"
+                        Height="50"
+                        Width="180"/>
                 </StackPanel>
             </Grid>
         </Grid>

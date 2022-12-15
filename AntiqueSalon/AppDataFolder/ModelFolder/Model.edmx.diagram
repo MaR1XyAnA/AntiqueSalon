@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b7acd49e40c440498739e3caed4bdd3a" Name="Diagram1">
+        <EntityTypeShape EntityType="AntiqueSalonDataBaseModel.AntiqueTable" Width="1.5" PointX="5.25" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="AntiqueSalonDataBaseModel.RentTable" Width="1.5" PointX="7.5" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AntiqueSalonDataBaseModel.RoleTable" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AntiqueSalonDataBaseModel.sysdiagrams" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AntiqueSalonDataBaseModel.TypeAntiqueTable" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AntiqueSalonDataBaseModel.WorkerTable" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AntiqueSalonDataBaseModel.СollectionTable" Width="1.5" PointX="7.5" PointY="6.625" IsExpanded="true" />
+        <AssociationConnector Association="AntiqueSalonDataBaseModel.FK_AntiqueTable_TypeAntiqueTable" ManuallyRouted="false" />
+        <AssociationConnector Association="AntiqueSalonDataBaseModel.FK_AntiqueTable_WorkerTable" ManuallyRouted="false" />
+        <AssociationConnector Association="AntiqueSalonDataBaseModel.FK_RentTable_AntiqueTable" ManuallyRouted="false" />
+        <AssociationConnector Association="AntiqueSalonDataBaseModel.FK_СollectionTable_AntiqueTable" ManuallyRouted="false" />
+        <AssociationConnector Association="AntiqueSalonDataBaseModel.FK_RentTable_WorkerTable" ManuallyRouted="false" />
+        <AssociationConnector Association="AntiqueSalonDataBaseModel.FK_WorkerTable_RoleTable" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

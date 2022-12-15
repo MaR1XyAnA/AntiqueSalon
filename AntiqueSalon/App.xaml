@@ -9,7 +9,10 @@
                 <ResourceDictionary Source="\AppDataFolder\StyleFolder\WindowsStyle.xaml"/>
                 <ResourceDictionary Source="\AppDataFolder\StyleFolder\BorderStyle.xaml"/>
                 <ResourceDictionary Source="\AppDataFolder\StyleFolder\ButtonStyle.xaml"/>
-                <ResourceDictionary Source="\AppDataFolder\StyleFolder\TExtBlockStyle.xaml"/>
+                <ResourceDictionary Source="\AppDataFolder\StyleFolder\TextBlockStyle.xaml"/>
+                <ResourceDictionary Source="\AppDataFolder\StyleFolder\TextBoxStyle.xaml"/>
+                <ResourceDictionary Source="\AppDataFolder\StyleFolder\PasswordBoxStyle.xaml"/>
+                <ResourceDictionary Source="\AppDataFolder\StyleFolder\ToggleButtonStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
